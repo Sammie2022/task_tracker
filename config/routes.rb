@@ -9,10 +9,12 @@ Rails.application.routes.draw do
   end
 
   get "up" => "rails/health#show", as: :rails_health_check
-  
-  # Update this line to route 'reports' path to ReportsController#index
+
+  # Main reports index page
   get "reports", to: "reports#index", as: :reports
-  get "reports", to: "reports#charts", as: :reports
+
+  # Separate route for charts
+  get "reports/charts", to: "reports#charts", as: :reports_charts
 
   root "projects#index"
 end

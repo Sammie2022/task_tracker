@@ -1,0 +1,6 @@
+format.pdf do
+  render pdf: "projects_list",
+         template: "projects/index",  # omit extension, Rails will find the right one
+         layout: 'pdf.html',
+         page_size: 'A4'
+end

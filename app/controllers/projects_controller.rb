@@ -3,6 +3,16 @@ class ProjectsController < ApplicationController
 
   def index
     @projects = Project.all
+
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: "projects_list",
+               template: "projects/index",   # Correct template path without extension
+               layout: 'pdf.html',           # Your PDF layout file
+               page_size: 'A4'
+      end
+    end
   end
 
   def show

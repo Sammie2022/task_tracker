@@ -1,0 +1,17 @@
+wb = xlsx_package.workbook
+
+wb.add_worksheet(name: "Issues") do |sheet|
+  # Header row
+  sheet.add_row ["ID", "Title", "Status", "Priority", "Created At"]
+
+  # Data rows
+  @issues.each do |issue|
+    sheet.add_row [
+      issue.id,
+      issue.title,
+      issue.status,
+      issue.priority,
+      issue.created_at.strftime("%Y-%m-%d %H:%M")
+    ]
+  end
+end
