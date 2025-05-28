@@ -1,10 +1,35 @@
-<p style="color: green"><%= notice %></p>
+<h2><%= @project.title %></h2>
+<p><%= @project.description %></p>
 
-<%= render @project %>
+<h4 class="mt-4">Issues</h4>
+<%= link_to "Add Issue", new_project_issue_path(@project), class: "btn btn-outline-primary mb-2" %>
 
-<div>
-  <%= link_to "Edit this project", edit_project_path(@project) %> |
-  <%= link_to "Back to projects", projects_path %>
+<% if @project.issues.any? %>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Status</th>
+        <th>Priority</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @project.issues.each do |issue| %>
+        <tr>
+          <td><%= link_to issue.title, project_issue_path(@project, issue) %></td>
+          <td><%= issue.status %></td>
+          <td><%= issue.priority %></td>
+          <td>
+            <%= link_to "Edit", edit_project_issue_path(@project, issue), class: "btn btn-sm btn-secondary" %>
+            <%= link_to "Delete", project_issue_path(@project, issue), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-sm btn-danger" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>No issues yet.</p>
+<% end %>
 
-  <%= button_to "Destroy this project", @project, method: :delete %>
-</div>
+<%= link_to "Back to Projects", projects_path, class: "btn btn-link mt-3" %>
