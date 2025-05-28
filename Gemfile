@@ -21,8 +21,6 @@ gem "axlsx_rails"
 
 # PDF export
 gem "wicked_pdf"
-gem "wkhtmltopdf-binary"  # Needed for wicked_pdf
-
 gem "tzinfo-data", platforms: %i[windows jruby]
 gem "bootsnap", require: false
 
