@@ -1,6 +1,11 @@
 class ReportsController < ApplicationController
   def charts
-    @issues_per_status = Issue.group(:status).count
-    @issues_per_project = Project.includes(:issues).map { |project| [project.title, project.issues.count] }.to_h
+    # Group issues count by status
+    @issues_by_status = Issue.group(:status).count
+
+    # Group issues count by project title
+    @issues_by_project = Project.joins(:issues)
+                                .group("projects.title")
+                                .count("issues.id")
   end
 end

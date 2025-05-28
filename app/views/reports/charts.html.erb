@@ -2,12 +2,12 @@
 
 <div class="row">
   <div class="col-md-6">
-    <h3>Issues per Status</h3>
-    <%= pie_chart @issues_per_status, colors: ["#3498db", "#f1c40f", "#2ecc71", "#e74c3c"] %>
+    <h3>Issues by Status</h3>
+    <%= pie_chart @issues_by_status, height: "300px", library: {legend: {position: 'right'}} %>
   </div>
 
   <div class="col-md-6">
-    <h3>Issues per Project</h3>
-    <%= column_chart @issues_per_project, colors: ["#8e44ad"] %>
+    <h3>Issues by Project</h3>
+    <%= bar_chart @issues_by_project, height: "300px", library: {legend: {position: 'top'}} %>
   </div>
 </div>
