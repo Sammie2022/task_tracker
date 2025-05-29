@@ -1,0 +1,20 @@
+<h1>Issues for Project: <%= project.title %></h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Status</th>
+      <th>Priority</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% issues.each do |issue| %>
+      <tr>
+        <td><%= issue.title %></td>
+        <td><%= issue.status %></td>
+        <td><%= issue.priority %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

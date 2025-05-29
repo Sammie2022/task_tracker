@@ -2,19 +2,19 @@
 
 <div class="mb-5">
   <h3>Issues by Status</h3>
-  <%= pie_chart @issues_by_status, height: "300px", library: {
-        title: { text: "Issues by Status", display: true },
-        legend: { position: 'bottom' }
-      } %>
+  <%= pie_chart @issues_by_status.presence || {}, height: "300px", library: {
+    title: { text: "Issues by Status", display: true },
+    legend: { position: 'bottom' }
+  } %>
 </div>
 
 <div>
   <h3>Issues by Project</h3>
-  <%= column_chart @issues_by_project, height: "300px", library: {
-        title: { text: "Issues by Project", display: true },
-        legend: { display: false },
-        scales: {
-          y: { beginAtZero: true }
-        }
-      } %>
+  <%= column_chart @issues_by_project.presence || {}, height: "300px", library: {
+    title: { text: "Issues by Project", display: true },
+    legend: { display: false },
+    scales: {
+      y: { beginAtZero: true }
+    }
+  } %>
 </div>

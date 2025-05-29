@@ -11,9 +11,13 @@ class IssuesController < ApplicationController
         response.headers['Content-Disposition'] = "attachment; filename=issues_project_#{@project.id}.xlsx"
       end
       format.pdf do
-        pdf = WickedPdf.new.pdf_from_string(
-          render_to_string(template: "issues/index.html.erb", layout: 'pdf.html', locals: { issues: @issues })
+        pdf_html = render_to_string(
+          template: "issues/export_pdf",
+          layout: 'pdf',                   # use the pdf layout
+          locals: { issues: @issues, project: @project }  # pass both issues and project
         )
+        pdf = WickedPdf.new.pdf_from_string(pdf_html)
+
         send_data pdf,
           filename: "issues_project_#{@project.id}.pdf",
           type: "application/pdf",

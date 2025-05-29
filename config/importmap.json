@@ -1,0 +1,14 @@
+{
+  "imports": {
+    "application": "/assets/application-b2b673106682826e84a86ca1cfadae4d6675ecdedd31557bf6a0613c921fa4dc.js",
+    "@hotwired/turbo-rails": "/assets/turbo.min-c85b4c5406dd49df1f63e03a5b07120d39cc3e33bc2448f5e926b80514f9dfc8.js",
+    "@hotwired/stimulus": "/assets/stimulus.min-dd364f16ec9504dfb72672295637a1c8838773b01c0b441bd41008124c407894.js",
+    "@hotwired/stimulus-loading": "/assets/stimulus-loading-3576ce92b149ad5d6959438c6f291e2426c86df3b874c525b30faad51b0d96b3.js",
+    "chartkick": "/assets/chartkick-8eb76e6cbdb540d495739fce84049fd038e59e7fd55c9e08e47b0b5a74b62db4.js",
+    "chart.js": "/assets/chart.js-a6fbcea11f8225393474c422fd37d6ebef5cef0ed4dfdf528fe370ae2cc2d043.js",
+    "@kurkle/color": "/assets/@kurkle--color-146b1a40092cb652a22694e5015592e907efc29ebcd6e71fe9afd355b87dd005.js",
+    "controllers/application": "/assets/controllers/application-368d98631bccbf2349e0d4f8269afb3fe9625118341966de054759d96ea86c7e.js",
+    "controllers/hello_controller": "/assets/controllers/hello_controller-549135e8e7c683a538c3d6d517339ba470fcfb79d62f738a0a089ba41851a554.js",
+    "controllers": "/assets/controllers/index-31a9bee606cbc5cdb1593881f388bbf4c345bf693ea24e124f84b6d5c98ab648.js"
+  }
+}
