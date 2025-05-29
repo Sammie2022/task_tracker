@@ -1,10 +1,10 @@
-<h1>Editing issue</h1>
+<h1>Editing Issue</h1>
 
 <%= render "form", issue: @issue %>
 
 <br>
 
 <div>
-  <%= link_to "Show this issue", @issue %> |
-  <%= link_to "Back to issues", issues_path %>
+  <%= link_to "Show this issue", project_issue_path(@issue.project, @issue) %> |
+  <%= link_to "Back to issues", project_issues_path(@issue.project) %>
 </div>

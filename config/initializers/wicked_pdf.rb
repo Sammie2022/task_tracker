@@ -1,3 +1,3 @@
-WickedPdf.config = {
-  exe_path: '/usr/bin/wkhtmltopdf'  # path to your wkhtmltopdf binary
-}
+WickedPdf.configure do |config|
+  config.exe_path = Gem.bin_path('wkhtmltopdf-binary', 'wkhtmltopdf')
+end

@@ -3,18 +3,32 @@ class IssuesController < ApplicationController
   before_action :set_issue, only: %i[show edit update destroy]
 
   def index
-    @issues = @project.issues
+    @issues = @project.issues.includes(:project)
+
+    respond_to do |format|
+      format.html
+      format.xlsx do
+        response.headers['Content-Disposition'] = "attachment; filename=issues_project_#{@project.id}.xlsx"
+      end
+      format.pdf do
+        pdf = WickedPdf.new.pdf_from_string(
+          render_to_string(template: "issues/index.html.erb", layout: 'pdf.html', locals: { issues: @issues })
+        )
+        send_data pdf,
+          filename: "issues_project_#{@project.id}.pdf",
+          type: "application/pdf",
+          disposition: "attachment"
+      end
+    end
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @issue = @project.issues.new
   end
 
-  def edit
-  end
+  def edit; end
 
   def create
     @issue = @project.issues.new(issue_params)
@@ -36,31 +50,6 @@ class IssuesController < ApplicationController
   def destroy
     @issue.destroy
     redirect_to project_issues_path(@project), notice: "Issue deleted."
-  end
-
-  # Export issues as Excel
-  def export_excel
-    @issues = @project.issues
-
-    respond_to do |format|
-      format.xlsx do
-        response.headers['Content-Disposition'] = "attachment; filename=issues_project_#{@project.id}.xlsx"
-      end
-    end
-  end
-
-  # Export issues as PDF
-  def export_pdf
-    @issues = @project.issues
-
-    pdf = WickedPdf.new.pdf_from_string(
-      render_to_string(template: "issues/export_pdf.html.erb", layout: 'pdf.html')
-    )
-
-    send_data pdf,
-      filename: "issues_project_#{@project.id}.pdf",
-      type: "application/pdf",
-      disposition: "attachment"
   end
 
   private

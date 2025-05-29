@@ -1,28 +1,33 @@
 <h1>Projects</h1>
 
 <div class="mb-3">
-  <%= link_to 'New Project', new_project_path, class: "btn btn-primary me-2" %>
-  <%= link_to 'Download PDF', projects_path(format: :pdf), class: "btn btn-success" %>
+  <%= link_to 'Download Excel', projects_path(format: :xlsx), class: "btn btn-warning" %>
 </div>
 
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Description</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<% @projects.each do |project| %>
+  <h2><%= project.title %></h2>
+  <p><%= project.description %></p>
 
-  <tbody>
-    <% @projects.each do |project| %>
-      <tr>
-        <td><%= project.title %></td>
-        <td><%= project.description %></td>
-        <td><%= link_to 'Show', project, class: "btn btn-outline-primary btn-sm" %></td>
-        <td><%= link_to 'Edit', edit_project_path(project), class: "btn btn-outline-secondary btn-sm" %></td>
-        <td><%= link_to 'Delete', project, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-danger btn-sm" %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+  <% if project.issues.any? %>
+    <table>
+      <thead>
+        <tr>
+          <th>Issue Title</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% project.issues.each do |issue| %>
+          <tr>
+            <td><%= issue.title %></td>
+            <td><%= issue.status %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p><em>No issues</em></p>
+  <% end %>
+
+  <hr>
+<% end %>

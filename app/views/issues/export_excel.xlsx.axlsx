@@ -1,17 +1,28 @@
-wb = xlsx_package.workbook
+def export_excel
+  @issues = @project.issues
 
-wb.add_worksheet(name: "Issues") do |sheet|
-  # Header row
-  sheet.add_row ["ID", "Title", "Status", "Priority", "Created At"]
+  # Create a new Excel package
+  p = Axlsx::Package.new
+  wb = p.workbook
 
-  # Data rows
-  @issues.each do |issue|
-    sheet.add_row [
-      issue.id,
-      issue.title,
-      issue.status,
-      issue.priority,
-      issue.created_at.strftime("%Y-%m-%d %H:%M")
-    ]
+  wb.add_worksheet(name: "Issues") do |sheet|
+    # Header row
+    sheet.add_row ["ID", "Title", "Status", "Priority", "Created At"]
+
+    # Data rows
+    @issues.each do |issue|
+      sheet.add_row [
+        issue.id,
+        issue.title,
+        issue.status,
+        issue.priority,
+        issue.created_at.strftime("%Y-%m-%d %H:%M")
+      ]
+    end
   end
+
+  # Send the Excel file as a response
+  send_data p.to_stream.read,
+            filename: "issues_project_#{@project.id}.xlsx",
+            type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
 end

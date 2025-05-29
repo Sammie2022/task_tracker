@@ -1,37 +1,31 @@
-<%= form_with(model: issue) do |form| %>
+<%= form_with(model: [issue.project, issue]) do |form| %>
   <% if issue.errors.any? %>
-    <div style="color: red">
+    <div class="alert alert-danger">
       <h2><%= pluralize(issue.errors.count, "error") %> prohibited this issue from being saved:</h2>
-
       <ul>
-        <% issue.errors.each do |error| %>
-          <li><%= error.full_message %></li>
+        <% issue.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
         <% end %>
       </ul>
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :title, style: "display: block" %>
-    <%= form.text_field :title %>
+  <div class="mb-3">
+    <%= form.label :title, class: "form-label" %>
+    <%= form.text_field :title, class: "form-control" %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :status, class: "form-label" %>
+    <%= form.select :status, Issue::STATUSES, {}, class: "form-select" %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :priority, class: "form-label" %>
+    <%= form.number_field :priority, in: 1..5, class: "form-control" %>
   </div>
 
   <div>
-    <%= form.label :status, style: "display: block" %>
-    <%= form.text_field :status %>
-  </div>
-
-  <div>
-    <%= form.label :priority, style: "display: block" %>
-    <%= form.number_field :priority %>
-  </div>
-
-  <div>
-    <%= form.label :project_id, style: "display: block" %>
-    <%= form.text_field :project_id %>
-  </div>
-
-  <div>
-    <%= form.submit %>
+    <%= form.submit class: "btn btn-primary" %>
   </div>
 <% end %>

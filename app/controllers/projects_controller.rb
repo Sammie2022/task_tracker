@@ -7,23 +7,27 @@ class ProjectsController < ApplicationController
     respond_to do |format|
       format.html
       format.pdf do
-        render pdf: "projects_list",
-               template: "projects/index",   # Correct template path without extension
-               layout: 'pdf.html',           # Your PDF layout file
-               page_size: 'A4'
+        pdf = WickedPdf.new.pdf_from_string(
+          render_to_string(template: "projects/index.html.erb", layout: 'pdf.html')
+        )
+        send_data pdf,
+          filename: "projects_list.pdf",
+          type: "application/pdf",
+          disposition: "attachment"
+      end
+      format.xlsx do
+        response.headers['Content-Disposition'] = 'attachment; filename="projects_list.xlsx"'
       end
     end
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @project = Project.new
   end
 
-  def edit
-  end
+  def edit; end
 
   def create
     @project = Project.new(project_params)

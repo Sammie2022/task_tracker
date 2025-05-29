@@ -1,4 +1,4 @@
-<div id="<%= dom_id issue %>">
+<div id="<%= dom_id(issue) %>">
   <p>
     <strong>Title:</strong>
     <%= issue.title %>
@@ -16,7 +16,6 @@
 
   <p>
     <strong>Project:</strong>
-    <%= issue.project_id %>
+    <%= link_to issue.project.title, project_path(issue.project) if issue.project %>
   </p>
-
 </div>
