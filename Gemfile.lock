@@ -257,7 +257,7 @@ DEPENDENCIES
   groupdate
   importmap-rails
   jbuilder
-  pg (~> 1.1)
+  pg
   puma (>= 5.0)
   rails (~> 7.1.3)
   sprockets-rails
