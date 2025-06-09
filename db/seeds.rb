@@ -11,9 +11,10 @@ Issue.destroy_all
   5.times do |j|
     project.issues.create!(
       title: "Issue #{j + 1}",
-      status: %w[New In\ Progress Closed].sample,
+      status: ["New", "In Progress", "Closed"].sample,
       priority: rand(1..5)
     )
   end
 end
+
 puts "Seeded #{Project.count} projects and #{Issue.count} issues"
